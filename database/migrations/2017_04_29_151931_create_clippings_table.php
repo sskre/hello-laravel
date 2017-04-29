@@ -15,6 +15,8 @@ class CreateClippingsTable extends Migration
     {
         Schema::create('clippings', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('url');
+            $table->text('title');
             $table->timestamps();
         });
     }
