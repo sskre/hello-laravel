@@ -8,11 +8,17 @@
                 <div class="panel-heading">Clippings</div>
 
                 <div class="panel-body">
+@forelse ($clippings as $clipping)
+@if ($loop->first)
                     <ul>
-@foreach ($clippings as $clipping)
+@endif
                         <li><a href='{{ $clipping->url }}' target='_blank'>{{ $clipping->title }}</a></li>
-@endforeach
+@if ($loop->last)
                     </ul>
+@endif
+@empty
+                    {{ __('message.no_item') }}
+@endforelse
                 </div>
             </div>
         </div>
