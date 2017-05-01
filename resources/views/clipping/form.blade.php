@@ -8,6 +8,20 @@
                 <div class="panel-heading">Create new clipping</div>
 
                 <div class="panel-body">
+@foreach ($errors->all() as $message)
+@if ($loop->first)
+                    <div class="alert alert-danger" role="alert">
+                        <div>
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            Validation error
+                        </div>
+@endif
+                        <div>{{ $message }}</div>
+@if ($loop->last)
+                    </div>
+@endif
+@endforeach
                     {!! Form::open(['route' => 'clipping.store', 'method' => 'POST']) !!}
                     {!! Form::label('url', 'URL') !!}
                     {!! Form::text('url') !!}
