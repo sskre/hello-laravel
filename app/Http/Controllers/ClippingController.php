@@ -8,13 +8,21 @@ use Illuminate\Http\Request;
 class ClippingController extends Controller
 {
     /**
+     * constractor
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('clipping/list');
     }
 
     /**
