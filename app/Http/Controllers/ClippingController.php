@@ -23,7 +23,7 @@ class ClippingController extends Controller
     public function index()
     {
         return view(
-            'clipping/list',
+            'clipping.list',
             [
                 'clippings' => Clipping::all(),
             ]
@@ -37,7 +37,7 @@ class ClippingController extends Controller
      */
     public function create()
     {
-        return view('clipping/form');
+        return view('clipping.form');
     }
 
     /**
