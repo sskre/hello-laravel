@@ -49,7 +49,8 @@ class ClippingController extends Controller
      */
     public function store(StoreClippingPost $request)
     {
-        //
+        Clipping::create($request->except('_token'));
+        return redirect('clipping');
     }
 
     /**
