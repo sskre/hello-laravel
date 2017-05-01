@@ -24,8 +24,8 @@ class StoreClippingPost extends FormRequest
     public function rules()
     {
         return [
-            'url'   => 'bail|required|url|unique:clippings',
-            'title' => 'bail|required',
+            'url'   => 'required|url|unique:clippings',
+            'title' => 'required',
         ];
     }
 }
