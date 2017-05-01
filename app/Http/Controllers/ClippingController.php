@@ -22,7 +22,12 @@ class ClippingController extends Controller
      */
     public function index()
     {
-        return view('clipping/list');
+        return view(
+            'clipping/list',
+            [
+                'clippings' => Clipping::all(),
+            ]
+        );
     }
 
     /**

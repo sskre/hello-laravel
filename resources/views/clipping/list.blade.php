@@ -5,10 +5,14 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Clippings</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    <ul>
+@foreach ($clippings as $clipping)
+                        <li><a href='{{ $clipping->url }}' target='_blank'>{{ $clipping->title }}</a></li>
+@endforeach
+                    </ul>
                 </div>
             </div>
         </div>
