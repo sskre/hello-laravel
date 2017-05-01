@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Clipping;
+use App\Http\Requests\StoreClippingPost;
 use Illuminate\Http\Request;
 
 class ClippingController extends Controller
@@ -46,7 +47,7 @@ class ClippingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreClippingPost $request)
     {
         //
     }

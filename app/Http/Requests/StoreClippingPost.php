@@ -13,7 +13,7 @@ class StoreClippingPost extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreClippingPost extends FormRequest
     public function rules()
     {
         return [
-            //
+            'url'   => 'bail|required|url|unique:clippings',
+            'title' => 'bail|required',
         ];
     }
 }
