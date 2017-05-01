@@ -49,7 +49,13 @@ class ClippingController extends Controller
      */
     public function store(StoreClippingPost $request)
     {
-        Clipping::create($request->except('_token'));
+        $result = Clipping::create($request->except('_token'));
+
+        if (isset($result->id))
+        {
+            $request->session()->flash('message', 'Saved successfully.');
+        }
+
         return redirect('clipping');
     }
 
