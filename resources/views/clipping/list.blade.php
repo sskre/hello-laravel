@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Clippings</div>
+                <div class="panel-heading">Clippings <a href='{{ url('clipping/create') }}' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-plus'></span></a></div>
 
                 <div class="panel-body">
 @forelse ($clippings as $clipping)

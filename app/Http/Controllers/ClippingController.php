@@ -37,7 +37,7 @@ class ClippingController extends Controller
      */
     public function create()
     {
-        //
+        return view('clipping/form');
     }
 
     /**
