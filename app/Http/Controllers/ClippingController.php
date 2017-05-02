@@ -53,7 +53,23 @@ class ClippingController extends Controller
 
         if (isset($result->id))
         {
-            $request->session()->flash('message', 'Saved successfully.');
+            $request->session()->flash(
+                'notification',
+                [
+                    'level' => 'info',
+                    'message' => 'Saved successfully.',
+                ]
+            );
+        }
+        else
+        {
+            $request->session()->flash(
+                'notification',
+                [
+                    'level' => 'error',
+                    'message' => 'Failed to save data.',
+                ]
+            );
         }
 
         return redirect('clipping');

@@ -8,12 +8,13 @@
                 <div class="panel-heading">Clippings <a href='{{ url('clipping/create') }}' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-plus'></span></a></div>
 
                 <div class="panel-body">
-@if (Session::has('message'))
-                    <div class="alert alert-success" role="alert">
-                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                        <span class="sr-only">Info:</span>
-                        {{ Session::get('message') }}
-                    </div>
+@if (Session::has('notification'))
+@if (Session::get('notification.level') == 'error')
+@include('layouts.notification.error', ['message' => Session::get('notification.message')])
+@endif
+@if (Session::get('notification.level') == 'info')
+@include('layouts.notification.info', ['message' => Session::get('notification.message')])
+@endif
 @endif
 @forelse ($clippings as $clipping)
 @if ($loop->first)
