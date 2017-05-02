@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Create new clipping</div>
+                <div class="panel-heading">Edit clipping</div>
 
                 <div class="panel-body">
 @foreach ($errors->all() as $message)
@@ -22,12 +22,12 @@
                     </div>
 @endif
 @endforeach
-                    {!! Form::open(['route' => 'clipping.store', 'method' => 'POST']) !!}
+                    {!! Form::model($clipping, ['route' => ['clipping.update', $clipping->id], 'method' => 'PUT']) !!}
                     {!! Form::label('url', 'URL') !!}
                     {!! Form::text('url') !!}
                     {!! Form::label('title', 'Title') !!}
                     {!! Form::text('title') !!}
-                    {!! Form::submit('Add clipping') !!}
+                    {!! Form::submit('Update clipping') !!}
                     {!! Form::close() !!}
                 </div>
             </div>

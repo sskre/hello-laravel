@@ -95,6 +95,7 @@ class ClippingController extends Controller
     public function edit(Clipping $clipping)
     {
         //
+        return view('clipping.edit', ['clipping' => $clipping]);
     }
 
     /**
