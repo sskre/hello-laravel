@@ -5,7 +5,12 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit clipping</div>
+                <div class="panel-heading">
+                    Edit clipping
+                    {!! Form::model($clipping, ['route' => ['clipping.destroy', $clipping->id], 'method' => 'DELETE', 'id' => 'destroy-clipping', 'class' => 'pull-right']) !!}
+                    <button type='button' class='btn btn-danger btn-xs destroy'><span class='glyphicon glyphicon-trash'></span></button>
+                    {!! Form::close() !!}
+                </div>
 
                 <div class="panel-body">
 @foreach ($errors->all() as $message)
@@ -34,4 +39,5 @@
         </div>
     </div>
 </div>
+@include('layouts.notification.dialog')
 @endsection
