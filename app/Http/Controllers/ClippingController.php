@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Clipping;
-use App\Http\Requests\StoreClippingPost;
+use App\Http\Requests\StoreClipping;
 use Illuminate\Http\Request;
 
 class ClippingController extends Controller
@@ -44,10 +44,10 @@ class ClippingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreClippingPost  $request
+     * @param  \App\Http\Requests\StoreClipping  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreClippingPost $request)
+    public function store(StoreClipping $request)
     {
         $result = Clipping::create($request->except('_token'));
 
