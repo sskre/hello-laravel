@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreClipping extends FormRequest
 {
@@ -23,9 +24,27 @@ class StoreClipping extends FormRequest
      */
     public function rules()
     {
-        return [
-            'url'   => 'required|url|unique:clippings',
-            'title' => 'required',
-        ];
+        switch ($this->method())
+        {
+            case 'POST':
+                return [
+                    'url'   => 'required|url|unique:clippings',
+                    'title' => 'required',
+                ];
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'url'   => [
+                        'required',
+                        'url',
+                        Rule::unique('clippings')->ignore($this->clipping->id),
+                    ],
+                    'title' => 'required',
+                ];
+            case 'GET':
+            case 'DELETE':
+            default:
+                return [];
+        }
     }
 }
