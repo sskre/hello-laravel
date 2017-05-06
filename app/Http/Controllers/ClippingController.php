@@ -23,12 +23,7 @@ class ClippingController extends Controller
      */
     public function index()
     {
-        return view(
-            'clipping.list',
-            [
-                'clippings' => Clipping::all(),
-            ]
-        );
+        return view('clipping.list', ['clippings' => Clipping::all()]);
     }
 
     /**
@@ -51,28 +46,24 @@ class ClippingController extends Controller
     {
         $result = Clipping::create($request->except('_token'));
 
-        if (isset($result->id))
+        if (! isset($result->id))
         {
-            $request->session()->flash(
-                'notification',
-                [
-                    'level' => 'info',
-                    'message' => 'Saved successfully.',
-                ]
-            );
-        }
-        else
-        {
-            $request->session()->flash(
+            return redirect('clipping')->with(
                 'notification',
                 [
                     'level' => 'error',
-                    'message' => 'Failed to save data.',
+                    'message' => __('message.create_failed'),
                 ]
             );
         }
 
-        return redirect('clipping');
+        return redirect('clipping')->with(
+            'notification',
+            [
+                'level' => 'info',
+                'message' => __('message.create_succeeded'),
+            ]
+        );
     }
 
     /**
@@ -106,28 +97,24 @@ class ClippingController extends Controller
      */
     public function update(StoreClipping $request, Clipping $clipping)
     {
-        if ($clipping->fill($request->except(['_token', '_method']))->save())
+        if (! $clipping->fill($request->except(['_token', '_method']))->save())
         {
-            $request->session()->flash(
-                'notification',
-                [
-                    'level' => 'info',
-                    'message' => 'Saved successfully.',
-                ]
-            );
-        }
-        else
-        {
-            $request->session()->flash(
+            return redirect('clipping')->with(
                 'notification',
                 [
                     'level' => 'error',
-                    'message' => 'Failed to save data.',
+                    'message' => __('message.update_failed'),
                 ]
             );
         }
 
-        return redirect('clipping');
+        return redirect('clipping')->with(
+            'notification',
+            [
+                'level' => 'info',
+                'message' => __('message.update_succeeded'),
+            ]
+        );
     }
 
     /**
@@ -144,7 +131,7 @@ class ClippingController extends Controller
                 'notification',
                 [
                     'level' => 'error',
-                    'message' => 'Failed to delete data.',
+                    'message' => __('message.delete_failed'),
                 ]
             );
         }
@@ -153,7 +140,7 @@ class ClippingController extends Controller
             'notification',
             [
                 'level' => 'info',
-                'message' => 'Deleted successfully.',
+                'message' => __('message.delete_succeeded'),
             ]
         );
     }
