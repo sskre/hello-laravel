@@ -94,20 +94,40 @@ class ClippingController extends Controller
      */
     public function edit(Clipping $clipping)
     {
-        //
         return view('clipping.edit', ['clipping' => $clipping]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreClipping  $request
      * @param  \App\Clipping  $clipping
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Clipping $clipping)
+    public function update(StoreClipping $request, Clipping $clipping)
     {
-        //
+        if ($clipping->fill($request->except(['_token', '_method']))->save())
+        {
+            $request->session()->flash(
+                'notification',
+                [
+                    'level' => 'info',
+                    'message' => 'Saved successfully.',
+                ]
+            );
+        }
+        else
+        {
+            $request->session()->flash(
+                'notification',
+                [
+                    'level' => 'error',
+                    'message' => 'Failed to save data.',
+                ]
+            );
+        }
+
+        return redirect('clipping');
     }
 
     /**
