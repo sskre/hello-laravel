@@ -138,6 +138,23 @@ class ClippingController extends Controller
      */
     public function destroy(Clipping $clipping)
     {
-        //
+        if (Clipping::destroy($clipping->id) !== 1)
+        {
+            return redirect('clipping')->with(
+                'notification',
+                [
+                    'level' => 'error',
+                    'message' => 'Failed to delete data.',
+                ]
+            );
+        }
+
+        return redirect('clipping')->with(
+            'notification',
+            [
+                'level' => 'info',
+                'message' => 'Deleted successfully.',
+            ]
+        );
     }
 }
