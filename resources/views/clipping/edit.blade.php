@@ -7,9 +7,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Edit clipping
-                    {!! Form::model($clipping, ['route' => ['clipping.destroy', $clipping->id], 'method' => 'DELETE', 'id' => 'destroy-clipping', 'class' => 'pull-right']) !!}
-                    <button type='button' class='btn btn-danger btn-xs destroy'><span class='glyphicon glyphicon-trash'></span></button>
-                    {!! Form::close() !!}
+                    <form method="POST" action="{{ route('clipping.destroy', $clipping->id) }}" accept-charset="UTF-8" id="destroy-clipping" class="pull-right">
+                        {{ method_field('DELETE') }}
+                        {{ csrf_field() }}
+                        <button type='button' class='btn btn-danger btn-xs destroy'><span class='glyphicon glyphicon-trash'></span></button>
+                    </form>
                 </div>
 
                 <div class="panel-body">
