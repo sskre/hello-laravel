@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
+use App\Http\Requests\StoreTag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    /**
+     * constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        return view('tag.list', ['tags' => Tag::all()]);
     }
 
     /**
@@ -24,18 +33,37 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('tag.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreTag  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTag $request)
     {
-        //
+        $result = Tag::create($request->except('_token'));
+
+        if (! isset($result->id))
+        {
+            return redirect('tag')->with(
+                'notification',
+                [
+                    'level' => 'error',
+                    'message' => __('message.create_failed'),
+                ]
+            );
+        }
+
+        return redirect('tag')->with(
+            'notification',
+            [
+                'level' => 'info',
+                'message' => __('message.create_succeeded'),
+            ]
+        );
     }
 
     /**
@@ -57,19 +85,36 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('tag.edit', ['tag' => $tag]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreTag  $request
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(StoreTag $request, Tag $tag)
     {
-        //
+        if (! $tag->fill($request->except(['_token', '_method']))->save())
+        {
+            return redirect('tag')->with(
+                'notification',
+                [
+                    'level' => 'error',
+                    'message' => __('message.update_failed'),
+                ]
+            );
+        }
+
+        return redirect('tag')->with(
+            'notification',
+            [
+                'level' => 'info',
+                'message' => __('message.update_succeeded'),
+            ]
+        );
     }
 
     /**
@@ -80,6 +125,23 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        if (Tag::destroy($tag->id) !== 1)
+        {
+            return redirect('tag')->with(
+                'notification',
+                [
+                    'level' => 'error',
+                    'message' => __('message.delete_failed'),
+                ]
+            );
+        }
+
+        return redirect('tag')->with(
+            'notification',
+            [
+                'level' => 'info',
+                'message' => __('message.delete_succeeded'),
+            ]
+        );
     }
 }

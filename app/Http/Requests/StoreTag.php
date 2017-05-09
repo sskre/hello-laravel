@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreTag extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreTag extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,24 @@ class StoreTag extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        switch ($this->method())
+        {
+            case 'POST':
+                return [
+                    'name' => 'required|unique:tags',
+                ];
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'name' => [
+                        'required',
+                        Rule::unique('tags')->ignore($this->tag->id),
+                    ],
+                ];
+            case 'GET':
+            case 'DELETE':
+            default:
+                return [];
+        }
     }
 }
