@@ -89,6 +89,6 @@
       src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
       integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
       crossorigin="anonymous"></script>
-    <script src="{{ asset('js/clipping.js') }}"></script>
+    <script src="{{ asset('js/hello-laravel.js') }}"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ $(document).ready(function(){
             draggable: false,
             buttons: {
                 'OK': function(){
-                    $('form#destroy-clipping').submit();
+                    $('form#destroy-model').submit();
                 },
                 'Cancel': function(){
                     $(this).dialog('close');

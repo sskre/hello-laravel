@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Edit clipping
-                    {!! Form::model($clipping, ['route' => ['clipping.destroy', $clipping->id], 'method' => 'DELETE', 'id' => 'destroy-clipping', 'class' => 'pull-right']) !!}
+                    {!! Form::model($clipping, ['route' => ['clipping.destroy', $clipping->id], 'method' => 'DELETE', 'id' => 'destroy-model', 'class' => 'pull-right']) !!}
                     <button type='button' class='btn btn-danger btn-xs destroy'><span class='glyphicon glyphicon-trash'></span></button>
                     {!! Form::close() !!}
                 </div>
