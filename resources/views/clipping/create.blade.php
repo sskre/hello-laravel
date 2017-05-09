@@ -22,14 +22,13 @@
                     </div>
 @endif
 @endforeach
-                    <form method="POST" action="{{ route('clipping.store') }}" accept-charset="UTF-8">
-                        {{ csrf_field() }}
-                        <label for="url">URL</label>
-                        <input name="url" type="text" value="{{ old('url') }}" id="url">
-                        <label for="title">Title</label>
-                        <input name="title" type="text" value="{{ old('title') }}" id="title">
-                        <input type="submit" value="Add clipping">
-                    </form>
+                    {!! Form::open(['route' => 'clipping.store', 'method' => 'POST']) !!}
+                    {!! Form::label('url', 'URL') !!}
+                    {!! Form::text('url') !!}
+                    {!! Form::label('title', 'Title') !!}
+                    {!! Form::text('title') !!}
+                    {!! Form::submit('Add clipping') !!}
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
