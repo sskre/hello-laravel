@@ -10,4 +10,9 @@ class Clipping extends Model
         'url',
         'title',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

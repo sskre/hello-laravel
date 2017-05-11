@@ -20,7 +20,7 @@
 @if ($loop->first)
                     <ul>
 @endif
-                        <li><a href='{{ route('clipping.edit', [$clipping->id]) }}' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil'></span></a> <a href='{{ $clipping->url }}' target='_blank'>{{ $clipping->title }}</a></li>
+                        <li><a href='{{ route('clipping.edit', [$clipping->id]) }}' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil'></span></a> <a href='{{ $clipping->url }}' target='_blank'>{{ $clipping->title }}</a> Posted by {{ $clipping->user->name }}</li>
 @if ($loop->last)
                     </ul>
 @endif
