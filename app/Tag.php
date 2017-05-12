@@ -9,4 +9,9 @@ class Tag extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function clippings()
+    {
+        return $this->belongsToMany('App\Clipping');
+    }
 }
