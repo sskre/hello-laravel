@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Auth;
 
 class StoreClipping extends FormRequest
 {
@@ -46,5 +47,18 @@ class StoreClipping extends FormRequest
             default:
                 return [];
         }
+    }
+
+    /**
+     * Trimmed attributes
+     *
+     * @return array Trimmed attributes
+     */
+    public function attrs()
+    {
+        $attrs = $this->except(['_token', '_method']);
+        $attrs['user_id'] = Auth::user()->id;
+
+        return $attrs;
     }
 }

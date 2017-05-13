@@ -9,6 +9,7 @@ class Clipping extends Model
     protected $fillable = [
         'url',
         'title',
+        'user_id',
     ];
 
     public function user()

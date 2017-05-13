@@ -44,7 +44,7 @@ class ClippingController extends Controller
      */
     public function store(StoreClipping $request)
     {
-        $result = Clipping::create($request->except('_token'));
+        $result = Clipping::create($request->attrs());
 
         if (! isset($result->id))
         {
@@ -97,7 +97,7 @@ class ClippingController extends Controller
      */
     public function update(StoreClipping $request, Clipping $clipping)
     {
-        if (! $clipping->fill($request->except(['_token', '_method']))->save())
+        if (! $clipping->fill($request->attrs())->save())
         {
             return redirect('clipping')->with(
                 'notification',
