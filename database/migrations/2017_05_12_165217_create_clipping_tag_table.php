@@ -18,8 +18,8 @@ class CreateClippingTagTable extends Migration
             $table->integer('clipping_id')->unsigned();
             $table->integer('tag_id')->unsigned();
             $table->timestamps();
-            $table->foreign('clipping_id')->references('id')->on('clippings');
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->foreign('clipping_id')->references('id')->on('clippings')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 

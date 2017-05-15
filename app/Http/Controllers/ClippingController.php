@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Clipping;
+use App\Tag;
 use App\Http\Requests\StoreClipping;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class ClippingController extends Controller
      */
     public function create()
     {
-        return view('clipping.create');
+        return view('clipping.create', ['tags' => Tag::pluck('name', 'id')]);
     }
 
     /**
@@ -44,9 +45,10 @@ class ClippingController extends Controller
      */
     public function store(StoreClipping $request)
     {
-        $result = Clipping::create($request->attrs());
+        $clipping = Clipping::create($request->attrs());
+        $clipping->tags()->attach($request->input('tags'));
 
-        if (! isset($result->id))
+        if (! isset($clipping->id))
         {
             return redirect('clipping')->with(
                 'notification',
@@ -85,7 +87,13 @@ class ClippingController extends Controller
      */
     public function edit(Clipping $clipping)
     {
-        return view('clipping.edit', ['clipping' => $clipping]);
+        return view(
+            'clipping.edit',
+            [
+                'clipping' => $clipping,
+                'tags'     => Tag::pluck('name', 'id'),
+            ]
+        );
     }
 
     /**
@@ -107,6 +115,8 @@ class ClippingController extends Controller
                 ]
             );
         }
+
+        $clipping->tags()->sync($request->input('tags'));
 
         return redirect('clipping')->with(
             'notification',

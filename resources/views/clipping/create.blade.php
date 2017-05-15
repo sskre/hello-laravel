@@ -23,10 +23,18 @@
 @endif
 @endforeach
                     {!! Form::open(['route' => 'clipping.store', 'method' => 'POST']) !!}
-                    {!! Form::label('url', 'URL') !!}
-                    {!! Form::text('url') !!}
-                    {!! Form::label('title', 'Title') !!}
-                    {!! Form::text('title') !!}
+                    <div class="form-group">
+                        {!! Form::label('url', 'URL') !!}
+                        {!! Form::text('url', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('title', 'Title') !!}
+                        {!! Form::text('title', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('tags', 'Tags') !!}
+                        {!! Form::select('tags[]', $tags, null, ['multiple' => true, 'class' => 'form-control']) !!}
+                    </div>
                     {!! Form::submit('Add clipping') !!}
                     {!! Form::close() !!}
                 </div>
